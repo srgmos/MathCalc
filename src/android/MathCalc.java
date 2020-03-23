@@ -41,8 +41,8 @@ public class MathCalc extends CordovaPlugin {
     private void add(JSONArray args, CallbackContext callbackContext) {
         if (args != null && args.length() > 0) {
             try {
-                int p1 = Integer.parsInt(args.getJSONObject(0).getString("param1"));
-                int p2 = Integer.parsInt(args.getJSONObject(1).getString("param2"));
+                int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
+                int p2 = Integer.parseInt(args.getJSONObject(1).getString("param2"));
 
                 callbackContext.success("" + (p1 + p2));
             } catch(Exception ex) {
@@ -56,8 +56,8 @@ public class MathCalc extends CordovaPlugin {
     private void subtract(JSONArray args, CallbackContext callbackContext) {
         if (args != null && args.length() > 0) {
             try {
-                int p1 = Integer.parsInt(args.getJSONObject(0).getString("param1"));
-                int p2 = Integer.parsInt(args.getJSONObject(1).getString("param2"));
+                int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
+                int p2 = Integer.parseInt(args.getJSONObject(1).getString("param2"));
 
                 callbackContext.success("" + (p1 - p2));
             } catch(Exception ex) {
