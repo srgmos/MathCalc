@@ -30,21 +30,30 @@ public class MathCalc extends CordovaPlugin {
         return false;
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
+    private void sayHello(String message, CallbackContext callbackContext) {
         if (message != null && message.length() > 0) {
-            callbackContext.success(message);
+            callbackContext.success("Hello " + message);
         } else {
             callbackContext.error("Expected one non-empty string argument.");
         }
     }
 
-    private void add(JSONArray args, CallbackContext callbackContext) {
+    private void operation(JSONArray args, String type) {
         if (args != null && args.length() > 0) {
             try {
                 int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
-                int p2 = Integer.parseInt(args.getJSONObject(1).getString("param2"));
+                int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
 
-                callbackContext.success("" + (p1 + p2));
+                if (type === "+") {
+                    int result = p1 + p2;
+                }
+                if (type === "-") {
+                    int result = p1 - p2;
+                }
+                if (type === "*") {
+                    int result = p1 * p2;
+                }
+                callbackContext.success("" + result);
             } catch(Exception ex) {
                 callbackContext.error("Something when wrong " + ex);
             }
@@ -53,18 +62,15 @@ public class MathCalc extends CordovaPlugin {
         }
     }
 
-    private void subtract(JSONArray args, CallbackContext callbackContext) {
-        if (args != null && args.length() > 0) {
-            try {
-                int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
-                int p2 = Integer.parseInt(args.getJSONObject(1).getString("param2"));
+    private void add(JSONArray args, CallbackContext callbackContext) {
+        this.operation(args, "+");
+    }
 
-                callbackContext.success("" + (p1 - p2));
-            } catch(Exception ex) {
-                callbackContext.error("Something when wrong " + ex);
-            }
-        } else {
-            callbackContext.error("Please don't pass null value.");
-        }
+    private void subtract(JSONArray args, CallbackContext callbackContext) {
+        this.operation(args, "-");
+    }
+
+    private void multiply(JSONArray args, CallbackContext callbackContext) {
+        this.operation(args, "*");
     }
 }
