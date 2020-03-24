@@ -14,9 +14,9 @@ public class MathCalc extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
+        if (action.equals("sayHello")) {
             String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
+            this.sayHello(message, callbackContext);
             return true;
         }
         if (action.equals("add")) {
@@ -25,6 +25,10 @@ public class MathCalc extends CordovaPlugin {
         }
         if (action.equals("subtract")) {
             this.subtract(args, callbackContext);
+            return true;
+        }
+        if (action.equals("multiply")) {
+            this.multiply(args, callbackContext);
             return true;
         }
         return false;
@@ -38,20 +42,20 @@ public class MathCalc extends CordovaPlugin {
         }
     }
 
-    private void operation(JSONArray args, String type) {
+    private void operation(JSONArray args, String type, CallbackContext callbackContext) {
         if (args != null && args.length() > 0) {
             try {
                 int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
                 int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
-
-                if (type === "+") {
-                    int result = p1 + p2;
+                int result = 0;
+                if (type == "+") {
+                    result = p1 + p2;
                 }
-                if (type === "-") {
-                    int result = p1 - p2;
+                if (type == "-") {
+                    result = p1 - p2;
                 }
-                if (type === "*") {
-                    int result = p1 * p2;
+                if (type == "*") {
+                    result = p1 * p2;
                 }
                 callbackContext.success("" + result);
             } catch(Exception ex) {
@@ -63,14 +67,14 @@ public class MathCalc extends CordovaPlugin {
     }
 
     private void add(JSONArray args, CallbackContext callbackContext) {
-        this.operation(args, "+");
+        this.operation(args, "+", callbackContext);
     }
 
     private void subtract(JSONArray args, CallbackContext callbackContext) {
-        this.operation(args, "-");
+        this.operation(args, "-", callbackContext);
     }
 
     private void multiply(JSONArray args, CallbackContext callbackContext) {
-        this.operation(args, "*");
+        this.operation(args, "*", callbackContext);
     }
 }

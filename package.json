@@ -1,6 +1,6 @@
 {
   "name": "mathcalc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is MathCalc example using cordova plugin",
   "main": "index.js",
   "scripts": {
